@@ -66,6 +66,6 @@ public class OrderService {
 //        LOGGER.info("orderId: {}", order.orderId);
 //        entityManager.persist(order);
 //
-//        LOGGER.info("Processed 'OrderCreated' event: {}", event);
+        LOGGER.info("Processed 'OrderCreated' event: {}", event);
     }
 }
