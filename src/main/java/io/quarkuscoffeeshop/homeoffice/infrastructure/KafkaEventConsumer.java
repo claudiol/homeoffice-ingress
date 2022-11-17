@@ -58,6 +58,8 @@ public class KafkaEventConsumer {
                 try {
                     Order order = objectMapper.readValue(message.getPayload(), Order.class);
                     LOG.debug("order: {}", order);
+					// LRC - Hardcoding all events
+					eventType=new String("OrderCreated");
                     orderService.onEventReceived(eventType, order);
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
