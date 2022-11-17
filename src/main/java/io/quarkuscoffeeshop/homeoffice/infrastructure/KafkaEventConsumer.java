@@ -47,7 +47,10 @@ public class KafkaEventConsumer {
             LOG.debug("message received: {}", message.getPayload());
 
             String eventId = getHeaderAsString(message, "id");
-            EventType eventType = EventType.valueOf(getHeaderAsString(message, "eventType"));
+            //EventType eventType = EventType.valueOf(getHeaderAsString(message, "eventType"));
+            EventType eventType = EventType.valueOf("OrderCreated");
+			// LRC - Hardcoding all events
+			//eventType=EventType.OrderCreated;
 
             LOG.debug("EventType is: {}", eventType);
 
