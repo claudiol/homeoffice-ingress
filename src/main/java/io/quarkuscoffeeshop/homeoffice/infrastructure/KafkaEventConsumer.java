@@ -39,7 +39,7 @@ public class KafkaEventConsumer {
     }
 
 
-    @Incoming("orders")
+    @Incoming("ordersi-in")
     @Transactional
     public CompletionStage<Void> onMessage(KafkaRecord<String, String> message) throws IOException {
 
