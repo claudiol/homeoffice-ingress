@@ -53,6 +53,7 @@ public class KafkaEventConsumer {
 			//eventType=EventType.OrderCreated;
 
             LOG.debug("EventType is: {}", eventType);
+            LOG.info("EventType is: {}", eventType);
 
             LOG.debug("Payload: {}", message.getPayload());
 
