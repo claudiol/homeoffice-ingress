@@ -22,6 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+import java.lang.System;
 
 @ApplicationScoped
 public class KafkaEventConsumer {
@@ -43,6 +44,7 @@ public class KafkaEventConsumer {
     @Transactional
     public CompletionStage<Void> onMessage(KafkaRecord<String, String> message) throws IOException {
 
+	System.out.println("ORDER-IN Message");
             //LOG.debug("Kafka message with key = {} arrived", message.getKey());
             LOG.debug("message received: {}", message.getPayload());
 
