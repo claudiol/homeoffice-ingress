@@ -44,7 +44,6 @@ public class KafkaEventConsumer {
     @Transactional
     public CompletionStage<Void> onMessage(KafkaRecord<String, String> message) throws IOException {
 
-	System.out.println("ORDER-IN Message");
             //LOG.debug("Kafka message with key = {} arrived", message.getKey());
             LOG.debug("message received: {}", message.getPayload());
 
@@ -55,6 +54,36 @@ public class KafkaEventConsumer {
             LOG.info("EventType is: {}", eventType);
 
             LOG.debug("Payload: {}", message.getPayload());
+
+            return CompletableFuture.runAsync(()->{
+
+                try {
+                    Order order = objectMapper.readValue(message.getPayload(), Order.class);
+                    LOG.debug("order: {}", order);
+                    orderService.onEventReceived(eventType, order);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+            }).thenRun(
+                    message::ack
+            );
+    }
+
+    @Incoming("orders-in")
+    @Transactional
+    public CompletionStage<Void> onInMessage(KafkaRecord<String, String> message) throws IOException {
+
+	        System.out.println("ORDER-IN Message");
+            //LOG.debug("Kafka message with key = {} arrived", message.getKey());
+            LOG.debug("[orders-in] message received: {}", message.getPayload());
+
+            String eventId = getHeaderAsString(message, "id");
+            EventType eventType = EventType.valueOf(getHeaderAsString(message, "eventType"));
+
+            LOG.debug("[orders-in] EventType is: {}", eventType);
+            LOG.info("[orders-in] EventType is: {}", eventType);
+
+            LOG.debug("[orders-in] Payload: {}", message.getPayload());
 
             return CompletableFuture.runAsync(()->{
 
