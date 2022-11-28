@@ -40,7 +40,7 @@ public class KafkaEventConsumer {
     }
 
 
-    @Incoming("orders-in")
+    @Incoming("orders")
     @Transactional
     public CompletionStage<Void> onMessage(KafkaRecord<String, String> message) throws IOException {
 
@@ -49,10 +49,7 @@ public class KafkaEventConsumer {
             LOG.debug("message received: {}", message.getPayload());
 
             String eventId = getHeaderAsString(message, "id");
-            //EventType eventType = EventType.valueOf(getHeaderAsString(message, "eventType"));
-            EventType eventType = EventType.valueOf("OrderCreated");
-			// LRC - Hardcoding all events
-			//eventType=EventType.OrderCreated;
+            EventType eventType = EventType.valueOf(getHeaderAsString(message, "eventType"));
 
             LOG.debug("EventType is: {}", eventType);
             LOG.info("EventType is: {}", eventType);
