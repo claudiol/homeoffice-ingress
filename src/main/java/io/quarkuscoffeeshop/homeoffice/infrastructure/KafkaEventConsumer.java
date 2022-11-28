@@ -77,11 +77,11 @@ public class KafkaEventConsumer {
             //LOG.debug("Kafka message with key = {} arrived", message.getKey());
             LOG.debug("[orders-in] message received: {}", message.getPayload());
 
-            String eventId = getHeaderAsString(message, "id");
-            EventType eventType = EventType.valueOf(getHeaderAsString(message, "eventType"));
+            //String eventId = getHeaderAsString(message, "id");
+            //EventType eventType = EventType.valueOf(getHeaderAsString(message, "eventType"));
 
-            LOG.debug("[orders-in] EventType is: {}", eventType);
-            LOG.info("[orders-in] EventType is: {}", eventType);
+            //LOG.debug("[orders-in] EventType is: {}", eventType);
+            //LOG.info("[orders-in] EventType is: {}", eventType);
 
             LOG.debug("[orders-in] Payload: {}", message.getPayload());
 
