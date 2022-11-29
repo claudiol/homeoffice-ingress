@@ -10,6 +10,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import java.math.BigDecimal;
 import static io.smallrye.common.constraint.Assert.assertNotNull;
 
 @QuarkusTest
