@@ -36,7 +36,7 @@ public class OrderService {
                 break;
             default:
                 LOGGER.error("Cannot determine appropriate action for {}", eventType);
-                order.persist();
+                //order.persist();
         }
     }
 
