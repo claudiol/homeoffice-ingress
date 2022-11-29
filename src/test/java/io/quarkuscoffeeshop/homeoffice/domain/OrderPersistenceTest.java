@@ -24,7 +24,7 @@ public class OrderPersistenceTest {
                 "WEB",
                 Instant.now(),
                 Optional.empty(),
-                Optional.of(new ArrayList<LineItem>(){{ add(new LineItem(Item.CAKEPOP, "Goofy")); }}),
+                Optional.of(new ArrayList<LineItem>(){{ add(new LineItem(Item.CAKEPOP, 3.15, "Goofy")); }}),
                 Optional.empty());
         order.persist();
 
