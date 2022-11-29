@@ -19,8 +19,10 @@ public class Order extends PanacheEntityBase {
     static Logger logger = LoggerFactory.getLogger(Order.class);
 
     @Id
-    @Column(nullable = false, name = "orderId")
-    public String orderId;
+    //@Column(nullable = false, name = "orderId")
+    @Column(nullable = false, name = "id")
+    //public String orderId;
+    public String id;
 
     public String orderSource;
 
@@ -35,7 +37,7 @@ public class Order extends PanacheEntityBase {
     private List<LineItem> kitchenLineItems;
 
     public Order(final String orderId, final String orderSource, final Instant instant, final Optional<String> loyaltyMemberId, Optional<List<LineItem>> baristaLineItems, Optional<List<LineItem>> kitchenLineItems) {
-        this.orderId = orderId;
+        this.id = orderId;
         this.orderSource = orderSource;
         this.timestamp = instant;
         if (loyaltyMemberId.isPresent()) {
@@ -61,7 +63,7 @@ public class Order extends PanacheEntityBase {
     @Override
     public String toString() {
         return new StringJoiner(", ", Order.class.getSimpleName() + "[", "]")
-                .add("orderId='" + orderId + "'")
+                .add("id='" + id + "'")
                 .add("orderSource='" + orderSource + "'")
                 .add("loyaltyMemberId='" + loyaltyMemberId + "'")
                 .add("timestamp=" + timestamp)
@@ -105,7 +107,7 @@ public class Order extends PanacheEntityBase {
     }
 
     public String getOrderId() {
-        return orderId;
+        return id;
     }
 
     public String getOrderSource() {
