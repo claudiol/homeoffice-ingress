@@ -28,6 +28,8 @@ public class Order extends PanacheEntityBase {
 
     public String loyaltyMemberId;
 
+    public String location;
+
     public Instant timestamp;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.ALL)
@@ -39,6 +41,7 @@ public class Order extends PanacheEntityBase {
     public Order(final String orderId, final String orderSource, final Instant instant, final Optional<String> loyaltyMemberId, Optional<List<LineItem>> baristaLineItems, Optional<List<LineItem>> kitchenLineItems) {
         this.id = orderId;
         this.orderSource = orderSource;
+		this.location = "Atlanta";
         this.timestamp = instant;
         if (loyaltyMemberId.isPresent()) {
             this.loyaltyMemberId = loyaltyMemberId.get();
@@ -65,6 +68,7 @@ public class Order extends PanacheEntityBase {
         return new StringJoiner(", ", Order.class.getSimpleName() + "[", "]")
                 .add("id='" + id + "'")
                 .add("orderSource='" + orderSource + "'")
+                .add("location='" + location + "'")
                 .add("loyaltyMemberId='" + loyaltyMemberId + "'")
                 .add("timestamp=" + timestamp)
                 .add("baristaLineItems=" + baristaLineItems)
@@ -112,6 +116,10 @@ public class Order extends PanacheEntityBase {
 
     public String getOrderSource() {
         return orderSource;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public Instant getTimestamp() {
