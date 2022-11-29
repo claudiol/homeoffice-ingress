@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.StringJoiner;
 
 @Entity
@@ -12,6 +13,8 @@ public class LineItem extends PanacheEntity {
 
     @Enumerated(EnumType.STRING)
     private Item item;
+
+    private BigDecimal price;
 
     private String name;
 
@@ -23,13 +26,15 @@ public class LineItem extends PanacheEntity {
     public LineItem() {
     }
 
-    public LineItem(Item item, String name) {
+    public LineItem(Item item, BigDecimal price, String name) {
         this.item = item;
+		this.price = price;
         this.name = name;
     }
 
-    public LineItem(Item item, String name, Order order) {
+    public LineItem(Item item, BigDecimal price, String name, Order order) {
         this.item = item;
+		this.price = price;
         this.name = name;
         this.order = order;
     }
@@ -38,6 +43,7 @@ public class LineItem extends PanacheEntity {
     public String toString() {
         return new StringJoiner(", ", LineItem.class.getSimpleName() + "[", "]")
                 .add("item=" + item)
+                .add("price=" + price)
                 .add("name='" + name + "'")
                 .add("order=" + order.getOrderId())
                 .toString();
@@ -69,6 +75,14 @@ public class LineItem extends PanacheEntity {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public String getName() {

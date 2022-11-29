@@ -50,12 +50,12 @@ public class Order extends PanacheEntityBase {
         }
         if (baristaLineItems.isPresent()) {
             baristaLineItems.get().forEach(baristaLineItem -> {
-                addBaristaLineItem(new LineItem(baristaLineItem.getItem(), baristaLineItem.getName(), this));
+                addBaristaLineItem(new LineItem(baristaLineItem.getItem(), baristaLineItem.getPrice(), baristaLineItem.getName(), this));
             });
         }
         if (kitchenLineItems.isPresent()) {
             baristaLineItems.get().forEach(kitchenLineItem -> {
-                addKitchenLineItem(new LineItem(kitchenLineItem.getItem(), kitchenLineItem.getName(), this));
+                addKitchenLineItem(new LineItem(kitchenLineItem.getItem(), kitchenLineItem.getPrice(), kitchenLineItem.getName(), this));
             });
         }
     }
@@ -84,7 +84,7 @@ public class Order extends PanacheEntityBase {
         if (this.baristaLineItems == null) {
             this.baristaLineItems = new ArrayList<>();
         }
-        this.baristaLineItems.add(new LineItem(lineItem.getItem(), lineItem.getName(), this));
+        this.baristaLineItems.add(new LineItem(lineItem.getItem(), lineItem.getPrice(), lineItem.getName(), this));
     }
 
     /**
@@ -95,7 +95,7 @@ public class Order extends PanacheEntityBase {
         if (this.kitchenLineItems == null) {
             this.kitchenLineItems = new ArrayList<>();
         }
-        this.kitchenLineItems.add(new LineItem(lineItem.getItem(), lineItem.getName(), this));
+        this.kitchenLineItems.add(new LineItem(lineItem.getItem(), lineItem.getPrice(), lineItem.getName(), this));
     }
 
     public Optional<List<LineItem>> getBaristaLineItems() {
