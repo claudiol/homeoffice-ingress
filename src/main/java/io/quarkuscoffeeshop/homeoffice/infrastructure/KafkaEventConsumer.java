@@ -1,6 +1,6 @@
 package io.quarkuscoffeeshop.homeoffice.infrastructure;
 
-
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -77,11 +77,17 @@ public class KafkaEventConsumer {
             //LOG.debug("Kafka message with key = {} arrived", message.getKey());
             LOG.debug("[orders-in] message received: {}", message.getPayload());
 
-            //String eventId = getHeaderAsString(message, "id");
-            //EventType eventType = EventType.valueOf(getHeaderAsString(message, "eventType"));
+            String myMessage = message.getPayload();
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    JsonNode jsonNode = objectMapper.readValue(myMessage, JsonNode.class);
 
-            //LOG.debug("[orders-in] EventType is: {}", eventType);
-            //LOG.info("[orders-in] EventType is: {}", eventType);
+	    JsonNode brandNode = jsonNode.get("id");
+	    String eventId = brandNode.asText();
+            //String eventId = getHeaderAsString(message, "id");
+            EventType eventType = EventType.OrderCreated; 
+
+            LOG.debug("[orders-in] EventType is: {}", eventType);
+            LOG.info("[orders-in] EventType is: {}", eventType);
 
             LOG.debug("[orders-in] Payload: {}", message.getPayload());
 
