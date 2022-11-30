@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import javax.persistence.PersistenceException;
+
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -49,7 +52,11 @@ public class OrderService {
     void onOrderCreated(final Order order) {
         LOGGER.debug("onOrderCreated being persisted: {}", order);
         //order.persist();
-        entityManager.persist(order);
+		try {
+          entityManager.persist(order);
+		} catch (PersistenceException e) {
+          LOGGER.debug("Order exception: {}", e);
+		} 
         LOGGER.debug("Order persisted: {}", order);
     }
 
