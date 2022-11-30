@@ -54,6 +54,7 @@ public class OrderService {
         //order.persist();
         //  entityManager.saveOrUpdate(order);
 		try {
+		  order.id="";
           order.persist();
 		} catch (PersistenceException e) {
           LOGGER.debug("Order exception: {}", e);
