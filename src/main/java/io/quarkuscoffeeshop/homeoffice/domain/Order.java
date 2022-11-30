@@ -19,7 +19,7 @@ public class Order extends PanacheEntityBase {
     static Logger logger = LoggerFactory.getLogger(Order.class);
 
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
     //@Column(nullable = false, name = "orderId")
     @Column(nullable = false, name = "id")
     //public String orderId;
