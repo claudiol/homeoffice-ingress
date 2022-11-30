@@ -26,6 +26,7 @@ public class OrderService {
         LOGGER.debug("processing EventType {} for Order {}", eventType, order);
         switch (eventType) {
             case OrderCreated:
+                LOGGER.debug("onOrderCreated being called: {}", order);
                 onOrderCreated(order);
                 break;
             case OrderUpdated:
@@ -41,6 +42,7 @@ public class OrderService {
     }
 
     void onOrderCreated(final Order order) {
+        LOGGER.debug("onOrderCreated being persisted: {}", order);
         order.persist();
         LOGGER.debug("Order persisted: {}", order);
     }
