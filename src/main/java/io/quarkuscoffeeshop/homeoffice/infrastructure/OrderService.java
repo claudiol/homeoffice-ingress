@@ -36,7 +36,7 @@ public class OrderService {
         switch (eventType) {
             case OrderCreated:
                 LOGGER.debug("onOrderCreated being called: {}", order);
-				order.id = "";
+				//order.id = "";
 				order.timestamp=Instant.now();
                 onOrderCreated(order);
                 break;
