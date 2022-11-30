@@ -52,8 +52,9 @@ public class OrderService {
     void onOrderCreated(final Order order) {
         LOGGER.debug("onOrderCreated being persisted: {}", order);
         //order.persist();
+        //  entityManager.saveOrUpdate(order);
 		try {
-          entityManager.persist(order);
+          order.persist();
 		} catch (PersistenceException e) {
           LOGGER.debug("Order exception: {}", e);
 		} 
