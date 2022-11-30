@@ -14,6 +14,7 @@ import javax.persistence.PersistenceException;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class OrderService {
         switch (eventType) {
             case OrderCreated:
                 LOGGER.debug("onOrderCreated being called: {}", order);
-		        order.id="";
+				order.timestamp=Instant.now();
                 onOrderCreated(order);
                 break;
             case OrderUpdated:
