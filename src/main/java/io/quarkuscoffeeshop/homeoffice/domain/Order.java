@@ -40,7 +40,7 @@ public class Order extends PanacheEntityBase {
     private List<LineItem> kitchenLineItems;
 
     public Order(final String orderId, final String orderSource, final Instant instant, final Optional<String> loyaltyMemberId, Optional<List<LineItem>> baristaLineItems, Optional<List<LineItem>> kitchenLineItems) {
-        this.id = ""; //orderId;
+        this.id = orderId;
         this.orderSource = orderSource;
 		this.location = "Atlanta";
         this.timestamp = instant;
