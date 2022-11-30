@@ -35,6 +35,7 @@ public class OrderService {
         switch (eventType) {
             case OrderCreated:
                 LOGGER.debug("onOrderCreated being called: {}", order);
+		        order.id="";
                 onOrderCreated(order);
                 break;
             case OrderUpdated:
@@ -54,7 +55,6 @@ public class OrderService {
         //order.persist();
         //  entityManager.saveOrUpdate(order);
 		try {
-		  order.id="";
           order.persist();
 		} catch (PersistenceException e) {
           LOGGER.debug("Order exception: {}", e);
