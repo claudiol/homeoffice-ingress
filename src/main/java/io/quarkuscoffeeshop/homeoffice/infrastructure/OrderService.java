@@ -13,6 +13,8 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import java.io.IOException;
+
 import static javax.transaction.Transactional.TxType;
 
 
@@ -20,6 +22,9 @@ import static javax.transaction.Transactional.TxType;
 public class OrderService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
+
+    @PersistenceContext // or even @Autowired
+    private EntityManager entityManager;
 
     @Transactional
     public void onEventReceived(EventType eventType, Order order) {
@@ -43,7 +48,8 @@ public class OrderService {
 
     void onOrderCreated(final Order order) {
         LOGGER.debug("onOrderCreated being persisted: {}", order);
-        order.persist();
+        //order.persist();
+        entityManager.persist(order);
         LOGGER.debug("Order persisted: {}", order);
     }
 

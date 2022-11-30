@@ -78,11 +78,11 @@ public class KafkaEventConsumer {
             LOG.debug("[orders-in] message received: {}", message.getPayload());
 
             String myMessage = message.getPayload();
-	    ObjectMapper objectMapper = new ObjectMapper();
-	    JsonNode jsonNode = objectMapper.readValue(myMessage, JsonNode.class);
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        JsonNode jsonNode = objectMapper.readValue(myMessage, JsonNode.class);
 
-	    JsonNode brandNode = jsonNode.get("id");
-	    String eventId = brandNode.asText();
+	        JsonNode brandNode = jsonNode.get("id");
+	        String eventId = brandNode.asText();
             //String eventId = getHeaderAsString(message, "id");
             EventType eventType = EventType.OrderCreated; 
 
