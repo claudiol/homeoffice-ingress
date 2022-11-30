@@ -82,7 +82,7 @@ public class KafkaEventConsumer {
 	        JsonNode jsonNode = objectMapper.readValue(myMessage, JsonNode.class);
 
 	        JsonNode brandNode = jsonNode.get("id");
-	        String eventId = ""; brandNode.asText();
+	        String eventId = ""; //brandNode.asText();
             //String eventId = getHeaderAsString(message, "id");
             EventType eventType = EventType.OrderCreated; 
 
